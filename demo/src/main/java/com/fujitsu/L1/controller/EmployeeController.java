@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fujitsu.L1.Pojo.Employee;
 import com.fujitsu.L1.Repository.EmployeeRepository;
 
 @RestController
-
+//@RequestMapping("/api")
 public class EmployeeController {
 
 	@Autowired 
@@ -35,21 +36,21 @@ public class EmployeeController {
 	}  
 	
 	@DeleteMapping("/employee/{empid}")  
-	private void deleteBook(@PathVariable("empid") int empid)   
+	private String deleteEmployee(@PathVariable("empid") long empid)   
 	{  
-		emprepo.delete(empid);  
+		return emprepo.delete(empid);  
 	}  
 	
 	@PostMapping("/employee")  
-	private int saveBook(@RequestBody Employee emp)   
+	private long saveEmployee(@RequestBody Employee emp)   
 	{  
 	Employee createdemp=emprepo.saveOrUpdate(emp);  
-	return createdemp.getEmpid();  
+	return createdemp.getEmp_id();  
 	}  
 	
 	//creating put mapping that updates the book detail   
 	@PutMapping("/employee")  
-	private Employee update(@RequestBody Employee emp)   
+	private Employee updateEmployee(@RequestBody Employee emp)   
 	{  
 		Employee createdemp=emprepo.saveOrUpdate(emp);   
 	return createdemp;  
