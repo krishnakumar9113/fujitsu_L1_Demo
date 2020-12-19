@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -27,6 +29,8 @@ public class Employee {
     )
      @Column(name = "emp_id")
 	private long emp_id;// (PK)				Int 	
+	@Size(min = 1, max = 50)
+	@Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
 	 @Column(name = "first_name")
 	private String first_name;//				Char ( 50)	
 	 @Column(name = "last_name")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,7 +30,7 @@ public class EmployeeRepository {
 		Session session= getCurrentSession();
 		session.clear();
 		
-		String sql= "select * from employees";
+		String sql= "select * from employees ORDER BY  first_name ASC , emp_id ASC";
 		List<Employee> emplist= session.createSQLQuery(sql).addEntity(Employee.class).getResultList();
 		return emplist;
 	}
@@ -87,6 +88,19 @@ public class EmployeeRepository {
 	         session.close(); 
 	      }
 		return emp;
+	}
+
+	public List<Employee> getEmpByNameGender(String empname, String gender) {
+		Session session= getCurrentSession();
+		session.clear();
+		
+		String sql= "select * from employees WHERE gender=? AND ( first_name LIKE ? OR last_name LIKE ?)   ORDER BY  first_name ASC , emp_id ASC ";
+		Query sqlqry=session.createSQLQuery(sql).addEntity(Employee.class);
+		sqlqry.setParameter(1, gender);
+		sqlqry.setParameter(2, "%"+empname+"%");
+		sqlqry.setParameter(3, "%"+empname+"%");
+		List<Employee> emplist= sqlqry.getResultList();
+		return emplist;
 	}
 
 	
