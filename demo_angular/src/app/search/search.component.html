@@ -1,0 +1,24 @@
+<button type="button" class="btn btn-primary" [routerLink]="['/addemp']">Add Employee</button>
+
+<table class="table margin">
+    <thead>
+        <tr>
+            <th scope="col">aadhaar_num</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of Employees">
+            <td>{{emp.aadhaar_num}}</td>
+            <td>{{emp.first_name}}</td>
+            <td><a [routerLink]="['/emphist']" [queryParams]="{id:emp.emp_id }">Employment</a>/
+                <a [routerLink]="['/addeditemp']" [queryParams]="{id:emp.emp_id }">Edit</a>/
+                <a (click)="deleteconf(emp.emp_id)" >Delete</a>
+            </td>
+
+
+        </tr>
+    </tbody>
+</table>
