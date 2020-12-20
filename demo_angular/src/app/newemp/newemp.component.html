@@ -1,39 +1,91 @@
 
-<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+<form #newEmpForm="ngForm" (ngSubmit)="onSubmit(newEmpForm)">
  
   <p>
     <label for="firstname">First Name</label>
-    <input type="text" name="firstname" ngModel>
+    <input type="text" name="first_name" ngModel>
   </p>
  
   <p>
     <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" ngModel>
+    <input type="text" name="last_name" ngModel>
+  </p>
+ 
+ 
+  <p>
+    <label for="gender">Gender</label>
+    <input type="radio" value="M" name="gender" ngModel> M
+    <input type="radio" value="F" name="gender" ngModel> F
   </p>
  
   <p>
-    <label for="email">Email </label>
-    <input type="text" id="email" name="emaasdfa" ngModel>
-  </p>
+    <label for="dob">Date of Birth </label>
  
+    <input type="date" id="dob" name="dob" ngModel
+    placeholder="dd/mm/yyyy" value=""
+    min="1997/01/01" max="2030/12/31"   onfocus="(this.type='date')">
+  </p>
   <p>
-    <label for="gender">Geneder</label>
-    <input type="radio" value="male" name="gender" ngModel> Male
-    <input type="radio" value="female" name="gender" ngModel> Female
+    <label for="pan_num">Pan Number </label>
+    <input type="text" id="pan_num" name="dpan_numb" ngModel>
   </p>
- 
   <p>
-    <label for="isMarried">Married</label>
-    <input type="checkbox" name="isMarried" ngModel>
+    <label for="aadhaar_num">Aadhar Number</label>
+    <input type="text" id="aadhaar_num" name="aadhaar_num" ngModel>
   </p>
- 
+  <p>
+    <label for="mobile_num">Mobile Number</label>
+    <input type="text" id="mobile_num" name="mobile_num" ngModel>
+  </p>
+  <p>
+    <label for="email_id">Email </label>
+    <input type="text" id="email_id" name="email_id" ngModel>
+  </p>
+  <p>
+    <label for="office_mail">Office Email</label>
+    <input type="text" id="office_mail" name="office_mail" ngModel>
+  </p>
+  <p>
+    <label for="permanent_address">Permanant Address</label>
+    <input type="text" id="permanent_address" name="permanent_address" ngModel>
+  </p>
+  <p>
+    <label for="present_address">Present Address</label>
+    <input type="text" id="present_address" name="present_address" ngModel>
+  </p>
+  <p>
+    <label for="blood_group">Blood Group</label>
+    <input type="text" id="blood_group" name="blood_group" ngModel>
+  </p>
+  <p>
+    <label for="doj">Date of Joining</label>
+
+      <input type="date" id="doj" name="doj" ngModel   onfocus="(this.type='date')"
+    placeholder="DD/MM/YYYY" value=""
+    min="01/01/1997" max="31/12/2091">
   
- 
+  </p>
+  <p>
+    <label for="emp_level">Employee Level</label>
+    <input type="text" id="emp_level" name="emp_level" ngModel>
+  </p>
+  <p>
+    <label for="post_name">Post</label>
+    <input type="text" id="post_name" name="post_name" ngModel>
+  </p>
+  <p>
+    <label for="basic_pay">Basic Pay</label>
+    <input type="text" id="basic_pay" name="basic_pay" ngModel>
+  </p>
+  <p>
+    <label for="house_allowance">House Allowance</label>
+    <input type="text" id="house_allowance" name="house_allowance" ngModel>
+  </p>
+
   <p>
     <button type="submit">Submit</button>
   </p>
-  
-  
-
-
+  <p>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </p>
 </form>

@@ -1,5 +1,6 @@
 package com.fujitsu.L1.Pojo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "employees")
@@ -29,16 +31,18 @@ public class Employee {
     )
      @Column(name = "emp_id")
 	private long emp_id;// (PK)				Int 	
-	@Size(min = 1, max = 50)
+	@Size(min = 5, max = 50)
 	@Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
 	 @Column(name = "first_name")
 	private String first_name;//				Char ( 50)	
+	@Size(min = 5, max = 50)
 	 @Column(name = "last_name")
 	 private String last_name	;//			Char(50)	
 	 @Column(name = "gender")
 	 private String gender;//			Char(2)	
 	 @Column(name = "dob")
-	 private LocalDateTime dob;//				date	
+	 @DateTimeFormat(pattern="dd/mm/yyyy")
+	 private LocalDate dob;//				date	
 	 @Column(name = "pan_num")
 	 private String pan_num;//			char(15)	
 	 @Column(name = "aadhaar_num")
@@ -58,7 +62,8 @@ public class Employee {
 	 @Column(name = "profile_pict")
 	 private String profile_pict	;//			char(200)	
 	 @Column(name = "doj")
-	 private LocalDateTime doj;//			date	
+	 @DateTimeFormat(pattern="dd/mm/yyyy")
+	 private LocalDate doj;//			date	
 	 @Column(name = "emp_level")
 	 private long emp_level;//			Int 	
 	 @Column(name = "post_name")
@@ -92,10 +97,10 @@ public class Employee {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public LocalDateTime getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
-	public void setDob(LocalDateTime dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 	public String getPan_num() {
@@ -152,10 +157,10 @@ public class Employee {
 	public void setProfile_pict(String profile_pict) {
 		this.profile_pict = profile_pict;
 	}
-	public LocalDateTime getDoj() {
+	public LocalDate getDoj() {
 		return doj;
 	}
-	public void setDoj(LocalDateTime doj) {
+	public void setDoj(LocalDate doj) {
 		this.doj = doj;
 	}
 	public long getEmp_level() {

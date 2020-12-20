@@ -45,7 +45,7 @@ public class EmployeeRepository {
 		if(!emplist.isEmpty())
 		return emplist.get(0);
 		else
-		return new Employee();
+			return null;
 	}
 
 	public String delete(long empid) {

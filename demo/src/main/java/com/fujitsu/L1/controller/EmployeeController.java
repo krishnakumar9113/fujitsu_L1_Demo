@@ -33,27 +33,51 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/employees")
-	private List<Employee> getAllEmployees()   
+	private ResponseEntity  getAllEmployees()   
 	{  
-	   return emprepo.getAllEmployees();  
+		List<Employee> emps=emprepo.getAllEmployees();
+		if(emps.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(createmessage(" Sorry, employee record could not be found!!"));
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(emps);
+		}
+ 
 	}  
 	
 	@GetMapping("/employeefilter")
-	private List<Employee> getemp_name_gender(@PathParam("empname") String empname,@PathParam("gender") String gender)   
+	private ResponseEntity  getemp_name_gender(@PathParam("empname") String empname,@PathParam("gender") String gender)   
 	{  
-	return emprepo.getEmpByNameGender(empname,gender); 
+		List<Employee> emps=emprepo.getEmpByNameGender(empname,gender);
+		if(emps.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(createmessage(" Sorry, employee record could not be found!!"));
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(emps);
+		}
+	//return emprepo.getEmpByNameGender(empname,gender); 
 	}  
 	
 	@GetMapping("/employee/{empid}")  
-	private Employee getEmployee(@PathVariable("empid") int empid)   
+	private ResponseEntity getEmployee(@PathVariable("empid") int empid)   
 	{  
-	return emprepo.getempById(empid);  
+		
+		Employee emp=emprepo.getempById(empid);
+		if(emp==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(createmessage(" Sorry, employee record could not be found!!"));
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(emp);
+		}
+
 	}  
 	
 	@DeleteMapping("/employee/{empid}")  
-	private String deleteEmployee(@PathVariable("empid") long empid)   
+	private ResponseEntity deleteEmployee(@PathVariable("empid") long empid)   
 	{  
-		return emprepo.delete(empid);  
+		if(emprepo.delete(empid).equals("Success")) {
+			return ResponseEntity.status(HttpStatus.OK).body(createmessage("Employee record has been deleted successfully"));
+		}else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createmessage("Error has encounterd, failed to delete record."));
+		}
+		
 	}  
 	
 	@PostMapping("/employee")  
@@ -67,21 +91,33 @@ public class EmployeeController {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(bindingResult.getFieldErrors());
 		}else {
 			Employee createdemp=emprepo.saveOrUpdate(emp);  
-			return ResponseEntity.ok().body("Employee record has been saved successfully.");
+			return ResponseEntity.status(HttpStatus.CREATED).body(createmessage("Employee record has been saved successfully"));
 			
 		}
 	
 	}catch(Exception e) {
-		return ResponseEntity.badRequest().body("Server error has encountered, failed to save the record");
+		return ResponseEntity.badRequest().body(createmessage("Server error has encountered, failed to save the record"));
 	}
 	}  
 	
+	
 	//creating put mapping that updates the book detail   
 	@PutMapping("/employee")  
-	private Employee updateEmployee(@RequestBody Employee emp)   
+	private ResponseEntity updateEmployee(@Valid @RequestBody Employee emp, BindingResult bindingResult)   
 	{  
-		Employee createdemp=emprepo.saveOrUpdate(emp);   
-	return createdemp;  
-	}  
+			if (bindingResult.hasErrors()){
+			
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(bindingResult.getFieldErrors());
+		}else {
+			Employee createdemp=emprepo.saveOrUpdate(emp);  
+			return ResponseEntity.status(HttpStatus.OK).body("Employee record has been updated successfully.");
+			//return createdemp;  
+		}
+		
+	}
+	
+	public String createmessage(String msg) {
+		return "{\"msg\":\""+msg+"\"}";
+	}
 	
 }

@@ -14,7 +14,26 @@ export class HelperService {
     return this.http.get(this.url+'/employees')
   }
 
+  getEmployeeByID(id:any) {
+    return this.http.get(this.url+'/employee/'+id)
+  }
+  getemployeefilter(empName:any,gender:any) {
+    return this.http.get(this.url+'/employeefilter?empname='+empName+'&gender='+gender);
+  }
+
   newEmployee(body:any) {
-    return this.http.post(this.url+'/employees',body);
+    return this.http.post(this.url+'/employee',body);
+  }
+
+  getEmployeeHistory(id:any) {
+    return this.http.get(this.url+'/employeehistory/'+id);
+  }
+
+  updateEmp(body:any){
+    return this.http.put(this.url+'/employee',body);
+  }
+
+ deleteEmployee(id:any) {
+    return this.http.delete(this.url+'/employee/'+id);
   }
 }
