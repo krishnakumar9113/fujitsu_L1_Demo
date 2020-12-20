@@ -9,12 +9,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./addeditemp.component.css']
 })
 export class AddeditempComponent implements OnInit {
+  msg:any="";
+  respmsg:any="";
   errordetail:any={};
     Employee:any={'emp_id':'','first_name':''};
-
-
-
-
   empid:any;
   constructor(private helperSvc :HelperService,private location: Location,private actroute:ActivatedRoute) {
     this.empid=this.actroute.snapshot.queryParamMap.get("id");
@@ -25,7 +23,7 @@ export class AddeditempComponent implements OnInit {
       this.Employee=response;
      // window.alert(response.msg);
     },(error:HttpErrorResponse)=>{
-     
+     this.msg=error.error.msg;
     } );
    }
 
@@ -38,6 +36,8 @@ export class AddeditempComponent implements OnInit {
     this.helperSvc.updateEmp(this.Employee).subscribe((response)=>{
      
       console.log(response);
+      this.respmsg=response;
+      this.msg= this.respmsg.msg;
      // window.alert(response.msg);
     },(error:HttpErrorResponse)=>{
       //error

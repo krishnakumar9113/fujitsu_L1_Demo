@@ -1,3 +1,5 @@
+
+<div>{{msg}}</div>
 <form #editempForm="ngForm" class="margin" (ngSubmit)="onSubmit()">
 
     <div class="row">
@@ -26,7 +28,8 @@
 
 
             <div>
-                <select name="sr_gender" [(ngModel)]="Employee.gender" id="inputGroupSelect01">
+                <label for="gender">Gender</label>
+                <select name="gender" [(ngModel)]="Employee.gender" id="inputGroupSelect01">
                     <option selected>Choose...</option>
                     <option value="M">M</option>
                     <option value="F">F</option>

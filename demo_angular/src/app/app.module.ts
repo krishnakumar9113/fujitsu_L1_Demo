@@ -10,6 +10,7 @@ import { SearchComponent } from './search/search.component';
 import { EmphistoryComponent } from './emphistory/emphistory.component';
 import { AddeditempComponent } from './addeditemp/addeditemp.component';
 import { NewempComponent } from './newemp/newemp.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { NewempComponent } from './newemp/newemp.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [HelperService],
+  providers: [HelperService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
