@@ -97,7 +97,13 @@
         <div class="col-lg-6">
             <div>
                 <label for="blood_group">Blood Group</label>
-                <input type="text" id="blood_group" name="blood_group"  [(ngModel)]="Employee.blood_group">
+                <select name="blood_group" ngModel id="inputGroupSelect02">
+                  <option selected>Choose...</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="O+">O+</option>
+                  <option value="etc">etc</option>
+                </select>
                 <p *ngIf="errordetail && errordetail.blood_group" style="color: red;">
                     {{errordetail.blood_group}}
             </div>
@@ -113,7 +119,7 @@
             </div>
             <div>
                 <label for="emp_level">Employee Level</label>
-                <input type="text" id="emp_level" name="emp_level" [(ngModel)]="Employee.emp_level">
+                <input type="number" id="emp_level" name="emp_level" [(ngModel)]="Employee.emp_level">
                 <p *ngIf="errordetail && errordetail.emp_level" style="color: red;">
                     {{errordetail.emp_level}}
             </div>
@@ -125,13 +131,13 @@
             </div>
             <div>
                 <label for="basic_pay">Basic Pay</label>
-                <input type="text" id="basic_pay" name="basic_pay" [(ngModel)]="Employee.basic_pay">
+                <input type="number" id="basic_pay" name="basic_pay" [(ngModel)]="Employee.basic_pay">
                 <p *ngIf="errordetail && errordetail.basic_pay" style="color: red;">
                     {{errordetail.basic_pay}}
             </div>
             <div>
                 <label for="house_allowance">House Allowance</label>
-                <input type="text" id="house_allowance" name="house_allowance" [(ngModel)]="Employee.house_allowance">
+                <input type="number" id="house_allowance" name="house_allowance" [(ngModel)]="Employee.house_allowance">
                 <p *ngIf="errordetail && errordetail.house_allowance" style="color: red;">
                     {{errordetail.house_allowance}}
             </div>

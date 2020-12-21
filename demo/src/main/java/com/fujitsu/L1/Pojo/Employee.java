@@ -1,7 +1,6 @@
 package com.fujitsu.L1.Pojo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,12 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fujitsu.L1.CustomValidator.EmailIDConstraint;
+import com.fujitsu.L1.CustomValidator.NumberConstraint;
+import com.fujitsu.L1.CustomValidator.OfficeEmailIDConstraint;
 
 @Entity
 @Table(name = "employees")
@@ -31,45 +40,92 @@ public class Employee {
     )
      @Column(name = "emp_id")
 	private long emp_id;// (PK)				Int 	
-	@Size(min = 5, max = 50)
+	
+	@Size(min = 1, max = 50 , message="Size must be between 1 and 50")
 	@Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
-	 @Column(name = "first_name")
+	@Column(name = "first_name")
 	private String first_name;//				Char ( 50)	
-	@Size(min = 5, max = 50)
+	
+	 @Size(min = 1, max = 50,message="Size must be between 1 and 50")
+	 @Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
 	 @Column(name = "last_name")
 	 private String last_name	;//			Char(50)	
+	
 	 @Column(name = "gender")
 	 private String gender;//			Char(2)	
+	 
 	 @Column(name = "dob")
 	 @DateTimeFormat(pattern="dd/mm/yyyy")
 	 private LocalDate dob;//				date	
+	 
+	 @Pattern(regexp="^[a-zA-Z0-9]*$", message="Pan Number should be alpha numeric")
+	 @Size(min = 10, max = 10 , message="Size must be 10")
 	 @Column(name = "pan_num")
-	 private String pan_num;//			char(15)	
+	 private String pan_num;//			char(15)
+	 
+	 @Pattern(regexp="[\\d]{12}", message="Aadhar Number should be 12 digits  numeric values")
 	 @Column(name = "aadhaar_num")
 	 private String aadhaar_num	;//			char(15)	
+	 
+	 @Pattern(regexp="[\\d]{10}", message="Mobile Number should be 10 digits  numeric values")
 	 @Column(name = "mobile_num")
 	 private String mobile_num;//				char(15)	
-	 @Column(name = "email_id")
+	 
+	 @NotBlank
+	 @Email (message="Please input a valid email!")
+	 @EmailIDConstraint(message="Personal Email id is already taken!")
+	 //@UniqueElements (message="Email id is already taken!")
+	 @Column(name = "email_id",unique = true)
 	 private String email_id;//			char(150)	
-	 @Column(name = "office_mail")
+	 
+	 @NotBlank
+	 @Email (message="Please input a valid email!")
+	// @UniqueElements (message="Email id is already taken!")
+	 @OfficeEmailIDConstraint(message="office Email id is already taken!")
+	 @Column(name = "office_mail",unique = true)
 	 private String office_mail;//			char(150)	
+	 
+	 @Size(min = 0, max = 200 , message="Text should not exceeds 200 characters!")
 	 @Column(name = "permanent_address")
 	 private String permanent_address;//				text	
+	 
+	 @Size(min = 0, max = 200 , message="Text should not exceeds 200 characters!")
 	 @Column(name = "present_address")
 	 private String present_address	;//			text	
+	 
 	 @Column(name = "blood_group")
 	 private String blood_group	;//			char(5)	
+	 
 	 @Column(name = "profile_pict")
 	 private String profile_pict	;//			char(200)	
+	 
 	 @Column(name = "doj")
 	 @DateTimeFormat(pattern="dd/mm/yyyy")
 	 private LocalDate doj;//			date	
+	 
+	 @Digits(fraction=0, integer = 2,message="Please input numeric only! ")
+	 @Range(min = 7l,max=13l, message = "Please select a value between 7 to 13!")
+	// @Size(min = 7, max = 13 , message="Please select a value between 7 to 13!")
 	 @Column(name = "emp_level")
 	 private long emp_level;//			Int 	
+	 
+	 @Size(min = 0, max = 30 , message="Please input within 30 characters")
+	 @Pattern(regexp="[a-zA-Z ]*$", message="Please input only alphabet and space")
 	 @Column(name = "post_name")
-	 private String post_name	;//			char(30)	
+	 private String post_name	;//			char(30)
+	 
+	// @Size(min = 3, max = 8 , message="Please input  between 3 to 8 characters!")
+	// @Pattern(regexp="/([1-9][0-9]*)|0/", message="Please input numeric only!")
+	// @Digits(fraction=0, integer = 8,message="Please input numeric only! ")
+	// @NumberConstraint
+	 @Range(min = 100l,max=99999999l, message = "Please input  between 3 to 8 characters!")
 	 @Column(name = "basic_pay")
 	 private long basic_pay;//			Int 	
+	 
+	// @Digits(fraction=0, integer = 5,message="Please input numeric only! ")
+	 @Range(min = 100l,max=99999l, message = "Please input  between 3 to 5 characters!")
+	// @NumberConstraint
+	// @Pattern(regexp="/([1-9][0-9]*)|0/", message="Please input numeric only!")
 	 @Column(name = "house_allowance")
 	 private long house_allowance;//				Int 	
 	

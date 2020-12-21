@@ -32,6 +32,7 @@ export class AddeditempComponent implements OnInit {
   }
   onSubmit(){
     //console.log(obj.value);
+    this.errordetail={};
     console.log(this.Employee);
     this.helperSvc.updateEmp(this.Employee).subscribe((response)=>{
      
@@ -42,10 +43,12 @@ export class AddeditempComponent implements OnInit {
     },(error:HttpErrorResponse)=>{
       //error
      //error
+    
      error.error.forEach((element:any) => {
       this.errordetail[element.field]=element.defaultMessage
     });
     console.log(this.errordetail);
+    this.msg= error.error.msg;
     } );
   }
   cancel() {

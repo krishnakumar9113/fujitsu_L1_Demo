@@ -8,22 +8,33 @@ import { Location } from '@angular/common';
   styleUrls: ['./newemp.component.css']
 })
 export class NewempComponent implements OnInit {
-
+  msg:any="";
+  respmsg:any="";
+  errordetail:any={};
   
   constructor(private helperSvc :HelperService,private location: Location) { }
 
   ngOnInit(): void {
   }
   onSubmit(obj:any){
+    this.errordetail={};
     console.log(obj.value);
     this.helperSvc.newEmployee(obj.value).subscribe((response)=>{
      
       console.log(response);
+      this.respmsg=response;
+      this.msg= this.respmsg.msg;
     
      // window.alert(response.msg);
     },(error:HttpErrorResponse)=>{
       //error
-      error.status
+      console.log(error);
+     
+      error.error.forEach((element:any) => {
+       
+        this.errordetail[element.field]=element.defaultMessage
+      });
+      console.log(this.errordetail); this.msg= error.error.msg;
     } );
   }
 

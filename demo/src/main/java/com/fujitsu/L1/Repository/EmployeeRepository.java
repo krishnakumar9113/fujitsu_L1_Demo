@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.hibernate.HibernateException;
@@ -15,7 +16,7 @@ import com.fujitsu.L1.Pojo.*;
 
 @Repository
 public class EmployeeRepository {
-	@PersistenceContext
+	  @PersistenceContext
     private EntityManager entityManager;
 
     /*
@@ -25,6 +26,50 @@ public class EmployeeRepository {
             return entityManager.unwrap(Session.class);
     }
 
+    public boolean EmailValidation(String EmailID) {
+    	boolean result=false;
+    	if(EmailID!=null) {
+    		Session session= getCurrentSession();
+    		session.clear();
+    		
+    		String sql= "select * from employees where email_id= :emailid";
+    		List<Object[]> emaillist= session.createSQLQuery(sql).addEntity(Employee.class).setParameter("emailid", EmailID).getResultList();
+    		if(emaillist.isEmpty())
+    			result=true;
+    			else
+    			result= false;
+    		
+    	}
+     //   return contactField != null && contactField.matches("[0-9]+")
+      //    && (contactField.length() > 8) && (contactField.length() < 14);
+		return result;
+    }
+    
+    
+    
+    public boolean officeEmailIDValidation(String officeMailID) {
+    	boolean result=false;
+    	if(officeMailID!=null) {
+    		Session session= getCurrentSession();
+    		session.clear();
+    		
+    		String sql= "select * from employees where office_mail= :emailid";
+    		List<Object[]> emaillist= session.createSQLQuery(sql).addEntity(Employee.class).setParameter("emailid", officeMailID).getResultList();
+    		if(emaillist.isEmpty())
+    			result=true;
+    			else
+    			result= false;
+    	}
+     //   return contactField != null && contactField.matches("[0-9]+")
+      //    && (contactField.length() > 8) && (contactField.length() < 14);
+		return result;
+    }
+    
+    
+    
+    
+    
+    
 	public  List<Employee> getAllEmployees() {
 		// TODO Auto-generated method stub
 		Session session= getCurrentSession();
@@ -69,7 +114,7 @@ public class EmployeeRepository {
 		
 	}
 
-	public Employee saveOrUpdate(Employee emp) {
+	public String saveOrUpdate(Employee emp) {
 		// TODO Auto-generated method stub
 		Session session =getCurrentSession();
 	      Transaction tx = null;
@@ -85,9 +130,9 @@ public class EmployeeRepository {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }finally {
-	         session.close(); 
+	        session.close(); 
 	      }
-		return emp;
+		return "Success";
 	}
 
 	public List<Employee> getEmpByNameGender(String empname, String gender) {

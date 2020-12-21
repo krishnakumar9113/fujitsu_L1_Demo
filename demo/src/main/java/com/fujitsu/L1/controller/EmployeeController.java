@@ -8,9 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.websocket.server.PathParam;
 
 import org.apache.commons.csv.CSVFormat;
@@ -23,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,18 +107,34 @@ public class EmployeeController {
 
 	{
 		try {
+			List<FieldError> be= new ArrayList<FieldError>();
+			if(!emprepo.EmailValidation(emp.getEmail_id())) {
+				
+				FieldError fe= new FieldError("employee", "email_id", "Email id is already taken!");
+				be.add(fe);
+			}
+			 if(!emprepo.officeEmailIDValidation(emp.getOffice_mail())) {
 
-			if (bindingResult.hasErrors()) {
-
-				return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(bindingResult.getFieldErrors());
-			} else {
-				Employee createdemp = emprepo.saveOrUpdate(emp);
+				FieldError fe= new FieldError("employee", "office_mail", " Office Email id is already taken!");
+				be.add(fe);
+			}
+			 if (bindingResult.hasErrors()) {
+				be.addAll(bindingResult.getFieldErrors());
+			 }
+			if(be.isEmpty()) {
+				String createdemp = emprepo.saveOrUpdate(emp);
 				return ResponseEntity.status(HttpStatus.CREATED)
 						.body(createmessage("Employee record has been saved successfully"));
-
+			
+			} else {
+				
+				System.out.println("error hit -POST");
+				
+				return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(be);
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest()
 					.body(createmessage("Server error has encountered, failed to save the record"));
 		}
@@ -125,7 +147,7 @@ public class EmployeeController {
 
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(bindingResult.getFieldErrors());
 		} else {
-			Employee createdemp = emprepo.saveOrUpdate(emp);
+			String createdemp = emprepo.saveOrUpdate(emp);
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(createmessage("Employee record has been updated successfully."));
 			// return createdemp;
