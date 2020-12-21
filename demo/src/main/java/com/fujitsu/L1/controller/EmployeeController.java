@@ -143,15 +143,43 @@ public class EmployeeController {
 	// creating put mapping that updates the book detail
 	@PutMapping("/employee")
 	private ResponseEntity updateEmployee(@Valid @RequestBody Employee emp, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+		
+		try {
+			List<FieldError> be= new ArrayList<FieldError>();
+			if(!emprepo.EmailValidation(emp.getEmail_id())) {
+				
+				FieldError fe= new FieldError("employee", "email_id", "Email id is already taken!");
+				be.add(fe);
+			}
+			 if(!emprepo.officeEmailIDValidation(emp.getOffice_mail())) {
 
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(bindingResult.getFieldErrors());
-		} else {
-			String createdemp = emprepo.saveOrUpdate(emp);
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(createmessage("Employee record has been updated successfully."));
-			// return createdemp;
-		}
+				FieldError fe= new FieldError("employee", "office_mail", " Office Email id is already taken!");
+				be.add(fe);
+			}
+			 if (bindingResult.hasErrors()) {
+				be.addAll(bindingResult.getFieldErrors());
+			 }
+		
+				if(be.isEmpty()) {
+					String createdemp = emprepo.saveOrUpdate(emp);
+					return ResponseEntity.status(HttpStatus.CREATED)
+							.body(createmessage("Employee record has been updated successfully"));
+				
+				} else {
+					
+					System.out.println("error hit -PUT");
+					
+					return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(be);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ResponseEntity.badRequest()
+						.body(createmessage("Server error has encountered, failed to save the record"));
+			}
+		
+		
+		
 
 	}
 
