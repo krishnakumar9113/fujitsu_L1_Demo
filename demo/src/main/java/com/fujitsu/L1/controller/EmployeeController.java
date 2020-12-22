@@ -146,15 +146,26 @@ public class EmployeeController {
 		
 		try {
 			List<FieldError> be= new ArrayList<FieldError>();
-			if(!emprepo.EmailValidation(emp.getEmail_id())) {
+			if(emp.getEmail_id().equals(emprepo.getempById(emp.getEmp_id()).getEmail_id())) {
 				
-				FieldError fe= new FieldError("employee", "email_id", "Email id is already taken!");
-				be.add(fe);
+				//No Error, SInce its a put request
+			}else
+			{
+				if(!emprepo.EmailValidation(emp.getEmail_id())) {
+					
+					FieldError fe= new FieldError("employee", "email_id", "Email id is already taken!");
+					be.add(fe);
+				}
 			}
-			 if(!emprepo.officeEmailIDValidation(emp.getOffice_mail())) {
-
-				FieldError fe= new FieldError("employee", "office_mail", " Office Email id is already taken!");
-				be.add(fe);
+			if(emp.getOffice_mail().equals(emprepo.getempById(emp.getEmp_id()).getOffice_mail())) {
+				
+			}else
+			{
+				 if(!emprepo.officeEmailIDValidation(emp.getOffice_mail())) {
+	
+					FieldError fe= new FieldError("employee", "office_mail", " Office Email id is already taken!");
+					be.add(fe);
+				}
 			}
 			 if (bindingResult.hasErrors()) {
 				be.addAll(bindingResult.getFieldErrors());

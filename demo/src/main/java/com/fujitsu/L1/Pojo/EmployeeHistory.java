@@ -1,5 +1,6 @@
 package com.fujitsu.L1.Pojo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -28,9 +29,9 @@ public class EmployeeHistory {
 	  @Column(name = "organization_name")
 	  private String organization_name;//				Int 	
 	  @Column(name = "from_date")
-	private LocalDateTime from_date	;//			date	
+	private LocalDate from_date	;//			date	
 	  @Column(name = "until_date")
-	private LocalDateTime until_date	;//			date	
+	private LocalDate until_date	;//			date	
 	  @Column(name = "location")
 	private String location	;//			chart(30)	
 	  @Column(name = "country")
@@ -58,16 +59,16 @@ public class EmployeeHistory {
 	public void setOrganization_name(String organization_name) {
 		this.organization_name = organization_name;
 	}
-	public LocalDateTime getFrom_date() {
+	public LocalDate getFrom_date() {
 		return from_date;
 	}
-	public void setFrom_date(LocalDateTime from_date) {
+	public void setFrom_date(LocalDate from_date) {
 		this.from_date = from_date;
 	}
-	public LocalDateTime getUntil_date() {
+	public LocalDate getUntil_date() {
 		return until_date;
 	}
-	public void setUntil_date(LocalDateTime until_date) {
+	public void setUntil_date(LocalDate until_date) {
 		this.until_date = until_date;
 	}
 	public String getLocation() {

@@ -45,7 +45,24 @@ public class EmployeeRepository {
 		return result;
     }
     
-    
+    public boolean EmailValidation_put(String EmailID) {
+    	boolean result=false;
+    	if(EmailID!=null) {
+    		Session session= getCurrentSession();
+    		session.clear();
+    		
+    		String sql= "select * from employees where email_id= :emailid";
+    		List<Object[]> emaillist= session.createSQLQuery(sql).addEntity(Employee.class).setParameter("emailid", EmailID).getResultList();
+    		if(emaillist.isEmpty())
+    			result=true;
+    			else
+    			result= false;
+    		
+    	}
+     //   return contactField != null && contactField.matches("[0-9]+")
+      //    && (contactField.length() > 8) && (contactField.length() < 14);
+		return result;
+    }
     
     public boolean officeEmailIDValidation(String officeMailID) {
     	boolean result=false;
@@ -117,6 +134,7 @@ public class EmployeeRepository {
 	public String saveOrUpdate(Employee emp) {
 		// TODO Auto-generated method stub
 		Session session =getCurrentSession();
+		session.clear();
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction();
@@ -147,6 +165,7 @@ public class EmployeeRepository {
 		List<Employee> emplist= sqlqry.getResultList();
 		return emplist;
 	}
+
 
 	
 }

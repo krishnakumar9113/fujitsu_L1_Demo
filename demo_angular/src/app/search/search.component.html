@@ -23,13 +23,14 @@
   </p>
   <button type="submit" class="btn btn-primary" >Search</button>
 </form>
-<div class=margin>
+<div style="margin-left: 3%">
     <button type="button" class="btn btn-primary" [routerLink]="['/addemp']">Add Employee</button>
-     <button type="button" class="btn btn-primary" (click)="downloadcsv()">CSV Download</button>
+     <button style="margin-left:20px;" type="button" class="btn btn-primary" (click)="downloadcsv()">CSV Download</button>
     <div>{{msg}}</div>
-<table class="table">
+<table class="table margin">
     <thead>
         <tr>
+            <th scope="col"></th>
             <th scope="col">Employee</th>
             <th scope="col">Contact</th>
             <th scope="col">Level/Post</th>
@@ -38,6 +39,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let emp of Employees">
+            <td><img style="width:40px ;height:50px" src="{{emp.profile_pict}} " alt="No Image Available" ></td>
             <td>{{emp.first_name}} {{emp.last_name}} <br> {{emp.emp_id}}</td>
             <td>{{emp.mobile_num}}<br>{{emp.office_mail}}</td>
             <td>{{emp.emp_level}}/<br>{{emp.post_name}}</td>

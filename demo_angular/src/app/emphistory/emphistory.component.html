@@ -1,5 +1,8 @@
-<H2>Employee History Screen</H2>
+<div class="margin">
+    <H2>Employee History Screen</H2>
 <H5>{{fname}} {{lname}} /{{empid}}</H5>
+</div>
+
 <table class="table margin">
     <thead>
         <tr>
@@ -12,9 +15,10 @@
     <tbody>
         <tr *ngFor="let emphist of EmployeeHistory">
             <td>{{emphist.organization_name}}</td>
-            <td>{{emphist.from_date}}-{{emphist.until_date}}</td>
+            <td>{{emphist.from_date}}  ~  {{emphist.until_date}}</td>
             <td>{{emphist.location}} ({{emphist.country}})</td>
             <td>{{emphist.post}}</td>
         </tr>
     </tbody>
 </table>
+<div class="margin"><a [routerLink]="['/search']">Back to list</a></div>

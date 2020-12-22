@@ -12,11 +12,11 @@ import javax.validation.Payload;
 
 
 	@Documented
-	@Constraint(validatedBy = EmailIDValidator.class)
+	@Constraint(validatedBy = AgeValidator.class)
 	@Target( { ElementType.METHOD, ElementType.FIELD })
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface EmailIDConstraint {
-	    String message() default "Email ID already Taken";
+	public @interface AgeConstraint {
+	    String message() default "Please  enter a valid date , age must be >=20";
 	    Class<?>[] groups() default {};
 	    Class<? extends Payload>[] payload() default {};
 	}

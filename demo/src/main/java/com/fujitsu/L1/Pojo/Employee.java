@@ -15,6 +15,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -24,9 +25,9 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fujitsu.L1.CustomValidator.EmailIDConstraint;
-import com.fujitsu.L1.CustomValidator.NumberConstraint;
-import com.fujitsu.L1.CustomValidator.OfficeEmailIDConstraint;
+import com.fujitsu.L1.CustomValidator.AgeConstraint;
+import com.fujitsu.L1.CustomValidator.GenderConstraint;
+import com.fujitsu.L1.CustomValidator.BloodGroupConstraint;
 
 @Entity
 @Table(name = "employees")
@@ -41,39 +42,44 @@ public class Employee {
      @Column(name = "emp_id")
 	private long emp_id;// (PK)				Int 	
 	
-	@Size(min = 1, max = 50 , message="Size must be between 1 and 50")
-	@Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
+	@Size(min = 1, max = 50 , message="Input between 1 to 50 characters!!")
+	@Pattern(regexp="[a-zA-Z]*", message="Please input alphabet only!!")
 	@Column(name = "first_name")
 	private String first_name;//				Char ( 50)	
 	
-	 @Size(min = 1, max = 50,message="Size must be between 1 and 50")
-	 @Pattern(regexp="[a-zA-Z]*", message="the name can only contain letters")
+	 @Size(min = 1, max = 50,message="Input between 1 to 50 characters!")
+	 @Pattern(regexp="[a-zA-Z]*", message="Please input alphabet only!")
 	 @Column(name = "last_name")
 	 private String last_name	;//			Char(50)	
 	
+	 @GenderConstraint
 	 @Column(name = "gender")
 	 private String gender;//			Char(2)	
 	 
+	 @Past(message="Date must be a Past Date")
+	 @AgeConstraint
 	 @Column(name = "dob")
 	 @DateTimeFormat(pattern="dd/mm/yyyy")
 	 private LocalDate dob;//				date	
 	 
-	 @Pattern(regexp="^[a-zA-Z0-9]*$", message="Pan Number should be alpha numeric")
-	 @Size(min = 10, max = 10 , message="Size must be 10")
+	 @Pattern(regexp="^[a-zA-Z0-9]*$", message="Please input alphanumeric only!")
+	 @Size(min = 10, max = 10 , message="Please input 10 characters only!")
 	 @Column(name = "pan_num")
 	 private String pan_num;//			char(15)
 	 
-	 @Pattern(regexp="[\\d]{12}", message="Aadhar Number should be 12 digits  numeric values")
+	 @Size(min = 12, max = 12 , message="Please input 12 numbers only!")
+	 @Pattern(regexp="[0-9]+", message="Please input numeric only!")
 	 @Column(name = "aadhaar_num")
 	 private String aadhaar_num	;//			char(15)	
 	 
-	 @Pattern(regexp="[\\d]{10}", message="Mobile Number should be 10 digits  numeric values")
+	 @Size(min = 10, max = 10 , message="Please input 10 numbers only!")
+	 @Pattern(regexp="[0-9]+", message="Please input numeric only!")
 	 @Column(name = "mobile_num")
 	 private String mobile_num;//				char(15)	
 	 
 	 @NotBlank
 	 @Email (message="Please input a valid email!")
-	 @EmailIDConstraint(message="Personal Email id is already taken!")
+	
 	 //@UniqueElements (message="Email id is already taken!")
 	 @Column(name = "email_id",unique = true)
 	 private String email_id;//			char(150)	
@@ -81,7 +87,7 @@ public class Employee {
 	 @NotBlank
 	 @Email (message="Please input a valid email!")
 	// @UniqueElements (message="Email id is already taken!")
-	 @OfficeEmailIDConstraint(message="office Email id is already taken!")
+	
 	 @Column(name = "office_mail",unique = true)
 	 private String office_mail;//			char(150)	
 	 
@@ -93,6 +99,7 @@ public class Employee {
 	 @Column(name = "present_address")
 	 private String present_address	;//			text	
 	 
+	 @BloodGroupConstraint
 	 @Column(name = "blood_group")
 	 private String blood_group	;//			char(5)	
 	 
@@ -109,7 +116,7 @@ public class Employee {
 	 @Column(name = "emp_level")
 	 private long emp_level;//			Int 	
 	 
-	 @Size(min = 0, max = 30 , message="Please input within 30 characters")
+	 @Size(min = 1, max = 30 , message="Please input within 30 characters")
 	 @Pattern(regexp="[a-zA-Z ]*$", message="Please input only alphabet and space")
 	 @Column(name = "post_name")
 	 private String post_name	;//			char(30)

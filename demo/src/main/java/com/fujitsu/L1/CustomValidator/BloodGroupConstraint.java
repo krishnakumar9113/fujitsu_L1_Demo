@@ -12,11 +12,11 @@ import javax.validation.Payload;
 
 
 	@Documented
-	@Constraint(validatedBy = OfficeEmailIDValidator.class)
+	@Constraint(validatedBy = BloodGroupValidator.class)
 	@Target( { ElementType.METHOD, ElementType.FIELD })
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface OfficeEmailIDConstraint {
-	    String message() default "Email ID already Taken";
+	public @interface BloodGroupConstraint {
+	    String message() default "Please select valid blood group!";
 	    Class<?>[] groups() default {};
 	    Class<? extends Payload>[] payload() default {};
 	}

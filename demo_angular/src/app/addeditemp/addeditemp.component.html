@@ -1,6 +1,8 @@
 
-<div>{{msg}}</div>
-<form #editempForm="ngForm" class="margin" (ngSubmit)="onSubmit()">
+<div class="margin">
+<H3> Edit Employee Details</H3>
+<div style= "margin-top: 30px;">{{msg}}</div>
+<form #editempForm="ngForm"  (ngSubmit)="onSubmit()">
 
     <div class="row">
         <div class="col-lg-6">
@@ -35,6 +37,9 @@
                     <option value="F">F</option>
                     <option value="ND">ND</option>
                   </select>
+                  <p *ngIf="errordetail && errordetail.gender" style="color: red;">
+                    {{errordetail.gender}}
+                </p>
             </div>
            
 
@@ -97,7 +102,7 @@
         <div class="col-lg-6">
             <div>
                 <label for="blood_group">Blood Group</label>
-                <select name="blood_group" ngModel id="inputGroupSelect02">
+                <select name="blood_group" [(ngModel)]="Employee.blood_group" id="inputGroupSelect02">
                   <option selected>Choose...</option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
@@ -147,8 +152,8 @@
 
     <p>
         <button type="submit">Submit</button>
+        <button type="button" style="margin: 10px;" (click)="cancel()">Cancel</button>
     </p>
-    <p>
-        <button type="button" (click)="cancel()">Cancel</button>
-    </p>
+   
 </form>
+</div>

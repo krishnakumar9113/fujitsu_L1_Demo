@@ -1,27 +1,29 @@
-<div>{{msg}}</div>
-<form #newEmpForm="ngForm" class="margin"  (ngSubmit)="onSubmit(newEmpForm)">
- 
-  <div class="row">
-    <div class="col-lg-6">
-      
-        <div>
-            <label for="firstname">First Name</label>
-            <input type="text" name="first_name" ngModel>
-            <p *ngIf="errordetail && errordetail.first_name" style="color: red;">
-                {{errordetail.first_name}}
-            </p>
-        </div>
 
-        <div>
-            <label for="lastname">Last Name</label>
-            <input type="text" name="last_name" ngModel>
-            <p *ngIf="errordetail && errordetail.last_name" style="color: red;">
-                {{errordetail.last_name}}
-            </p>
-        </div>
-
-
-        <div>
+<div class="margin">
+  <H3> New Employee Details</H3>
+  <div style= "margin-top: 30px;">{{msg}}</div>
+  <form #newEmpForm="ngForm"   (ngSubmit)="onSubmit(newEmpForm)">
+   
+    <div class="row">
+      <div class="col-lg-6">
+        
+          <div>
+              <label for="firstname">First Name</label>
+              <input type="text" name="first_name" ngModel>
+              <p *ngIf="errordetail && errordetail.first_name" style="color: red;">
+                  {{errordetail.first_name}}
+              </p>
+          </div>
+  
+          <div>
+              <label for="lastname">Last Name</label>
+              <input type="text" name="last_name" ngModel>
+              <p *ngIf="errordetail && errordetail.last_name" style="color: red;">
+                  {{errordetail.last_name}}
+              </p>
+          </div>
+  
+          <div>
             <label for="gender">Gender</label>
             <select name="gender" ngModel id="inputGroupSelect01">
                 <option selected>Choose...</option>
@@ -29,228 +31,230 @@
                 <option value="F">F</option>
                 <option value="ND">ND</option>
               </select>
-        </div>
-       
-
-        <div>
-            <label for="dob">Date of Birth </label>
-
-            <input type="date" id="dob" name="dob" ngModel placeholder="dd/mm/yyyy" value="" min="1997/01/01"
-                max="2030/12/31" onfocus="(this.type='date')">
-                <p *ngIf="errordetail && errordetail.dob" style="color: red;">
-                    {{errordetail.dob}}
-                </p>
-        </div>
-        <div>
-            <label for="pan_num">Pan Number </label>
-            <input type="text" id="pan_num" name="pan_num"ngModel>
-            <p *ngIf="errordetail && errordetail.pan_num" style="color: red;">
-                {{errordetail.pan_num}}
+              <p *ngIf="errordetail && errordetail.gender" style="color: red;">
+                {{errordetail.gender}}
             </p>
         </div>
-        <div>
-            <label for="aadhaar_num">Aadhar Number</label>
-            <input type="text" id="aadhaar_num" name="aadhaar_num"  ngModel>
-            <p *ngIf="errordetail && errordetail.aadhaar_num" style="color: red;">
-                {{errordetail.aadhaar_num}}
-            </p>
-        </div>
-        <div>
-            <label for="mobile_num">Mobile Number</label>
-            <input type="text" id="mobile_num" name="mobile_num"  ngModel>
-            <p *ngIf="errordetail && errordetail.mobile_num" style="color: red;">
-                {{errordetail.mobile_num}}
-            </p>
-        </div>
-        <div>
-            <label for="email_id">Email </label>
-            <input type="text" id="email_id" name="email_id" ngModel>
-            <p *ngIf="errordetail && errordetail.email_id" style="color: red;">
-                {{errordetail.email_id}}
-        </div>
-        <div>
-            <label for="office_mail">Office Email</label>
-            <input type="text" id="office_mail" name="office_mail"  ngModel>
-            <p *ngIf="errordetail && errordetail.office_mail" style="color: red;">
-                {{errordetail.office_mail}}
-        </div>
-        <div>
-            <label for="permanent_address">Permanant Address</label>
-            <input type="text" id="permanent_address" name="permanent_address" ngModel>
-            <p *ngIf="errordetail && errordetail.permanent_address" style="color: red;">
-                {{errordetail.permanent_address}}
-        </div>
-        <div>
-            <label for="present_address">Present Address</label>
-            <input type="text" id="present_address" name="present_address"  ngModel>
-            <p *ngIf="errordetail && errordetail.present_address" style="color: red;">
-                {{errordetail.present_address}}
-        </div>
-
-    </div>
-    <div class="col-lg-6">
-        <div>
-            <label for="blood_group">Blood Group</label>
-            <select name="blood_group" ngModel id="inputGroupSelect02">
-              <option selected>Choose...</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="O+">O+</option>
-              <option value="etc">etc</option>
-            </select>
-            <p *ngIf="errordetail && errordetail.blood_group" style="color: red;">
-                {{errordetail.blood_group}}
-        </div>
-        <div>
-            <label for="doj">Date of Joining</label>
-            <input type="date" id="doj" name="doj" ngModel placeholder="dd/mm/yyyy" value="" min="1997/01/01"
-            max="2030/12/31" onfocus="(this.type='date')">
-            <p *ngIf="errordetail && errordetail.doj" style="color: red;">
-                {{errordetail.doj}}
-            </p>
-           
-
-        </div>
-        <div>
-            <label for="emp_level">Employee Level</label>
-            <input type="number" id="emp_level" name="emp_level" ngModel>
-            <p *ngIf="errordetail && errordetail.emp_level" style="color: red;">
-                {{errordetail.emp_level}}
-        </div>
-        <div>
-            <label for="post_name">Post</label>
-            <input type="text" id="post_name" name="post_name" ngModel>
-            <p *ngIf="errordetail && errordetail.post_name" style="color: red;">
-                {{errordetail.post_name}}
-        </div>
-        <div>
-            <label for="basic_pay">Basic Pay</label>
-            <input type="number" id="basic_pay" name="basic_pay" ngModel>
-            <p *ngIf="errordetail && errordetail.basic_pay" style="color: red;">
-                {{errordetail.basic_pay}}
-        </div>
-        <div>
-            <label for="house_allowance">House Allowance</label>
-            <input type="number" id="house_allowance" name="house_allowance" ngModel>
-            <p *ngIf="errordetail && errordetail.house_allowance" style="color: red;">
-                {{errordetail.house_allowance}}
-        </div>
-
-    </div>
+  
+          <div>
+              <label for="dob">Date of Birth </label>
+  
+              <input type="date" id="dob" name="dob" ngModel placeholder="dd/mm/yyyy" value="" min="1997/01/01"
+                  max="2030/12/31" onfocus="(this.type='date')">
+                  <p *ngIf="errordetail && errordetail.dob" style="color: red;">
+                      {{errordetail.dob}}
+                  </p>
+          </div>
+          <div>
+              <label for="pan_num">Pan Number </label>
+              <input type="text" id="pan_num" name="pan_num"ngModel>
+              <p *ngIf="errordetail && errordetail.pan_num" style="color: red;">
+                  {{errordetail.pan_num}}
+              </p>
+          </div>
+          <div>
+              <label for="aadhaar_num">Aadhar Number</label>
+              <input type="text" id="aadhaar_num" name="aadhaar_num"  ngModel>
+              <p *ngIf="errordetail && errordetail.aadhaar_num" style="color: red;">
+                  {{errordetail.aadhaar_num}}
+              </p>
+          </div>
+          <div>
+              <label for="mobile_num">Mobile Number</label>
+              <input type="text" id="mobile_num" name="mobile_num"  ngModel>
+              <p *ngIf="errordetail && errordetail.mobile_num" style="color: red;">
+                  {{errordetail.mobile_num}}
+              </p>
+          </div>
+          <div>
+              <label for="email_id">Email </label>
+              <input type="text" id="email_id" name="email_id" ngModel>
+              <p *ngIf="errordetail && errordetail.email_id" style="color: red;">
+                  {{errordetail.email_id}}
+          </div>
+          <div>
+              <label for="office_mail">Office Email</label>
+              <input type="text" id="office_mail" name="office_mail"  ngModel>
+              <p *ngIf="errordetail && errordetail.office_mail" style="color: red;">
+                  {{errordetail.office_mail}}
+          </div>
+          <div>
+              <label for="permanent_address">Permanant Address</label>
+              <input type="text" id="permanent_address" name="permanent_address" ngModel>
+              <p *ngIf="errordetail && errordetail.permanent_address" style="color: red;">
+                  {{errordetail.permanent_address}}
+          </div>
+          <div>
+              <label for="present_address">Present Address</label>
+              <input type="text" id="present_address" name="present_address"  ngModel>
+              <p *ngIf="errordetail && errordetail.present_address" style="color: red;">
+                  {{errordetail.present_address}}
+          </div>
+  
+      </div>
+      <div class="col-lg-6">
+          <div>
+              <label for="blood_group">Blood Group</label>
+              <select name="blood_group" ngModel id="inputGroupSelect02">
+                <option selected>Choose...</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="O+">O+</option>
+                <option value="etc">etc</option>
+              </select>
+              <p *ngIf="errordetail && errordetail.blood_group" style="color: red;">
+                  {{errordetail.blood_group}}
+          </div>
+          <div>
+              <label for="doj">Date of Joining</label>
+              <input type="date" id="doj" name="doj" ngModel placeholder="dd/mm/yyyy" value="" min="1997/01/01"
+              max="2030/12/31" onfocus="(this.type='date')">
+              <p *ngIf="errordetail && errordetail.doj" style="color: red;">
+                  {{errordetail.doj}}
+              </p>
+             
+  
+          </div>
+          <div>
+              <label for="emp_level">Employee Level</label>
+              <input type="number" id="emp_level" name="emp_level" ngModel>
+              <p *ngIf="errordetail && errordetail.emp_level" style="color: red;">
+                  {{errordetail.emp_level}}
+          </div>
+          <div>
+              <label for="post_name">Post</label>
+              <input type="text" id="post_name" name="post_name" ngModel>
+              <p *ngIf="errordetail && errordetail.post_name" style="color: red;">
+                  {{errordetail.post_name}}
+          </div>
+          <div>
+              <label for="basic_pay">Basic Pay</label>
+              <input type="number" id="basic_pay" name="basic_pay" ngModel>
+              <p *ngIf="errordetail && errordetail.basic_pay" style="color: red;">
+                  {{errordetail.basic_pay}}
+          </div>
+          <div>
+              <label for="house_allowance">House Allowance</label>
+              <input type="number" id="house_allowance" name="house_allowance" ngModel>
+              <p *ngIf="errordetail && errordetail.house_allowance" style="color: red;">
+                  {{errordetail.house_allowance}}
+          </div>
+  
+      </div>
+  </div>
+  
+  <p>
+      <button type="submit">Submit</button>
+ 
+      <button type="button" style="margin: 10px;" (click)="cancel()">Cancel</button>
+  </p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--old code-->
+    
+    <!--
+    <p>
+      <label for="firstname">First Name</label>
+      <input type="text" name="first_name" ngModel>
+    </p>
+   
+    <p>
+      <label for="lastname">Last Name</label>
+      <input type="text" name="last_name" ngModel>
+    </p>
+   
+   
+    <p>
+      <label for="gender">Gender</label>
+      <input type="radio" value="M" name="gender" ngModel> M
+      <input type="radio" value="F" name="gender" ngModel> F
+    </p>
+   
+    <p>
+      <label for="dob">Date of Birth </label>
+   
+      <input type="date" id="dob" name="dob" ngModel
+      placeholder="dd/mm/yyyy" value=""
+      min="1997/01/01" max="2030/12/31"   onfocus="(this.type='date')">
+    </p>
+    <p>
+      <label for="pan_num">Pan Number </label>
+      <input type="text" id="pan_num" name="dpan_numb" ngModel>
+    </p>
+    <p>
+      <label for="aadhaar_num">Aadhar Number</label>
+      <input type="text" id="aadhaar_num" name="aadhaar_num" ngModel>
+    </p>
+    <p>
+      <label for="mobile_num">Mobile Number</label>
+      <input type="text" id="mobile_num" name="mobile_num" ngModel>
+    </p>
+    <p>
+      <label for="email_id">Email </label>
+      <input type="text" id="email_id" name="email_id" ngModel>
+    </p>
+    <p>
+      <label for="office_mail">Office Email</label>
+      <input type="text" id="office_mail" name="office_mail" ngModel>
+    </p>
+    <p>
+      <label for="permanent_address">Permanant Address</label>
+      <input type="text" id="permanent_address" name="permanent_address" ngModel>
+    </p>
+    <p>
+      <label for="present_address">Present Address</label>
+      <input type="text" id="present_address" name="present_address" ngModel>
+    </p>
+    <p>
+      <label for="blood_group">Blood Group</label>
+      <input type="text" id="blood_group" name="blood_group" ngModel>
+    </p>
+    <p>
+      <label for="doj">Date of Joining</label>
+  
+        <input type="date" id="doj" name="doj" ngModel   onfocus="(this.type='date')"
+      placeholder="DD/MM/YYYY" value=""
+      min="01/01/1997" max="31/12/2091">
+    
+    </p>
+    <p>
+      <label for="emp_level">Employee Level</label>
+      <input type="text" id="emp_level" name="emp_level" ngModel>
+    </p>
+    <p>
+      <label for="post_name">Post</label>
+      <input type="text" id="post_name" name="post_name" ngModel>
+    </p>
+    <p>
+      <label for="basic_pay">Basic Pay</label>
+      <input type="text" id="basic_pay" name="basic_pay" ngModel>
+    </p>
+    <p>
+      <label for="house_allowance">House Allowance</label>
+      <input type="text" id="house_allowance" name="house_allowance" ngModel>
+    </p>
+  
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+    <p>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </p>-->
+  </form>
 </div>
-
-<p>
-    <button type="submit">Submit</button>
-</p>
-<p>
-    <button type="button" (click)="cancel()">Cancel</button>
-</p>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <!--old code-->
-  
-  <!--
-  <p>
-    <label for="firstname">First Name</label>
-    <input type="text" name="first_name" ngModel>
-  </p>
- 
-  <p>
-    <label for="lastname">Last Name</label>
-    <input type="text" name="last_name" ngModel>
-  </p>
- 
- 
-  <p>
-    <label for="gender">Gender</label>
-    <input type="radio" value="M" name="gender" ngModel> M
-    <input type="radio" value="F" name="gender" ngModel> F
-  </p>
- 
-  <p>
-    <label for="dob">Date of Birth </label>
- 
-    <input type="date" id="dob" name="dob" ngModel
-    placeholder="dd/mm/yyyy" value=""
-    min="1997/01/01" max="2030/12/31"   onfocus="(this.type='date')">
-  </p>
-  <p>
-    <label for="pan_num">Pan Number </label>
-    <input type="text" id="pan_num" name="dpan_numb" ngModel>
-  </p>
-  <p>
-    <label for="aadhaar_num">Aadhar Number</label>
-    <input type="text" id="aadhaar_num" name="aadhaar_num" ngModel>
-  </p>
-  <p>
-    <label for="mobile_num">Mobile Number</label>
-    <input type="text" id="mobile_num" name="mobile_num" ngModel>
-  </p>
-  <p>
-    <label for="email_id">Email </label>
-    <input type="text" id="email_id" name="email_id" ngModel>
-  </p>
-  <p>
-    <label for="office_mail">Office Email</label>
-    <input type="text" id="office_mail" name="office_mail" ngModel>
-  </p>
-  <p>
-    <label for="permanent_address">Permanant Address</label>
-    <input type="text" id="permanent_address" name="permanent_address" ngModel>
-  </p>
-  <p>
-    <label for="present_address">Present Address</label>
-    <input type="text" id="present_address" name="present_address" ngModel>
-  </p>
-  <p>
-    <label for="blood_group">Blood Group</label>
-    <input type="text" id="blood_group" name="blood_group" ngModel>
-  </p>
-  <p>
-    <label for="doj">Date of Joining</label>
-
-      <input type="date" id="doj" name="doj" ngModel   onfocus="(this.type='date')"
-    placeholder="DD/MM/YYYY" value=""
-    min="01/01/1997" max="31/12/2091">
-  
-  </p>
-  <p>
-    <label for="emp_level">Employee Level</label>
-    <input type="text" id="emp_level" name="emp_level" ngModel>
-  </p>
-  <p>
-    <label for="post_name">Post</label>
-    <input type="text" id="post_name" name="post_name" ngModel>
-  </p>
-  <p>
-    <label for="basic_pay">Basic Pay</label>
-    <input type="text" id="basic_pay" name="basic_pay" ngModel>
-  </p>
-  <p>
-    <label for="house_allowance">House Allowance</label>
-    <input type="text" id="house_allowance" name="house_allowance" ngModel>
-  </p>
-
-  <p>
-    <button type="submit">Submit</button>
-  </p>
-  <p>
-    <button type="button" (click)="cancel()">Cancel</button>
-  </p>-->
-</form>

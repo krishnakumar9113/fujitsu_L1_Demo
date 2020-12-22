@@ -12,11 +12,11 @@ import javax.validation.Payload;
 
 
 	@Documented
-	@Constraint(validatedBy = NumberValidator.class)
+	@Constraint(validatedBy = GenderValidator.class)
 	@Target( { ElementType.METHOD, ElementType.FIELD })
 	@Retention(RetentionPolicy.RUNTIME)
-	public @interface NumberConstraint {
-	    String message() default "Please input numeric only!";
+	public @interface GenderConstraint {
+	    String message() default "Please input valid gender!";
 	    Class<?>[] groups() default {};
 	    Class<? extends Payload>[] payload() default {};
 	}
